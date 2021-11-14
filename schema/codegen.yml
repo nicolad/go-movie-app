@@ -1,6 +1,6 @@
 # Codegen for the client
 overwrite: true
-schema: 
+schema:
   - ./schema.graphql
   - ../client/src/graphql/client-schema.graphql
 documents: ../client/src/graphql/**/*.ts

@@ -18,7 +18,7 @@ const defaultPort = "8080"
 
 func main() {
 	db.Init()
-	defer db.Close()
+	defer db.Close()	
 
 	port := os.Getenv("PORT")
 	if port == "" {

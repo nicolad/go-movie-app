@@ -1,59 +1,22 @@
 # GraphQL schema
 
-type Article {
-  id: Int!
-  title: String!
-  body: String!
-  authorID: Int!
-  author: Author!
-  createdAt: Time!
-  updatedAt: Time!
-}
-
-type Author {
-  id: Int!
-  name: String!
-  createdAt: Time!
-  updatedAt: Time!
-}
-
-# Query
 type Query {
-  articles: [Article!]!
-  article(id: Int!): Article!
-  authors: [Author!]!
-  author(id: Int!): Author!
+  user(id: ID!): User
+  movies(search: String!): [Movie!]!
 }
 
-# Mutation
-input NewArticle {
-  title: String!
-  body: String!
-  authorID: Int!
-}
-
-input NewAuthor {
+type User {
+  id: ID!
   name: String!
+  likes: [Movie!]!
 }
 
-input EditArticle {
-  id: Int!
+type Movie {
+  id: ID!
   title: String!
-  body: String!
-}
-
-input EditAuthor {
-  id: Int!
-  name: String!
+  year: String!
 }
 
 type Mutation {
-  createArticle(input: NewArticle!): Article!
-  updateArticle(input: EditArticle!): Article!
-  deleteArticle(id: Int!): Article!
-  createAuthor(input: NewAuthor!): Author!
-  updateAuthor(input: EditAuthor!): Author!
-  deleteAuthor(id: Int!): Author!
+  like(userId: ID!, movieId: ID!): User
 }
-
-scalar Time
