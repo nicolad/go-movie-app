@@ -9,6 +9,7 @@ import (
 
 	"github.com/nicolad/go-movie-app/graph/generated"
 	"github.com/nicolad/go-movie-app/graph/model"
+	"github.com/nicolad/go-movie-app/omdb"
 )
 
 func (r *mutationResolver) Like(ctx context.Context, userID string, movieID string) (*model.User, error) {
@@ -22,7 +23,7 @@ func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error
 }
 
 func (r *queryResolver) Movies(ctx context.Context, search string) ([]*model.Movie, error) {
-	panic(fmt.Errorf("not implemented"))
+	return omdb.Search(search)
 }
 
 // Mutation returns generated.MutationResolver implementation.

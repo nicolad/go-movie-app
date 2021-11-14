@@ -12,9 +12,14 @@ func main() {
 	db := connection.GetInstance()
 	defer connection.Close()
 
+	// db.Create(&model.User{
+	// 	ID: "1",
+	// 	Name: "Tom",
+	// })
+
 	db.Create(&model.User{
-		ID: "1",
-		Name: "Tom",
+		ID: "2",
+		Name: "Bob",
 	})
 	fmt.Print("\r\n✨ Seed data has been added.\r\n")
 }
