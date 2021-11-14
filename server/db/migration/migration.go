@@ -12,7 +12,7 @@ func main() {
 	db := connection.GetInstance()
 	defer connection.Close()
 
-	db.AutoMigrate(&model.Author{}, &model.Article{})
+	db.AutoMigrate(&model.User{})
 
 	fmt.Print("\r\n✨ Migration completed.\r\n")
 }

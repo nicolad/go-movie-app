@@ -14,22 +14,24 @@ CRUD example of Apollo Client 3 (with gqlgen)
 ## Getting Started
 
 ### Server
+
 ```
 docker-compose build                                         // Build the image
-docker-compose run --rm api go run db/migration/migration.go // Migration
-docker-compose run --rm api go run db/seed/seed.go           // Seed
+docker-compose run --rm api go run db/migration/migration.go
+docker-compose run --rm api go run db/seed/seed.go
 docker-compose up                                            // Run the container
 ```
 
 ### Client
+
 (Node v12.14.0)
+
 ```
 npm i
 npm run dev
 ```
 
 The example site will be accessible at http://localhost:3000/
-
 
 ### About this demo app
 

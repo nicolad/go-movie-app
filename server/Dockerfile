@@ -1,13 +1,12 @@
-FROM golang:1.14.1-alpine
+FROM --platform=linux/amd64 golang:1.16
 
 # Move to project root
 WORKDIR /go/src/github.com/nicolad/go-movie-app
 
-# Install air
-RUN apk update
-RUN apk add curl
-RUN curl -fLo /go/bin/air https://git.io/linux_air \
-  && chmod +x /go/bin/air
+COPY . .
 
-# Start live-reloading
+RUN go mod download
+
+RUN go get github.com/cosmtrek/air
+
 CMD air
