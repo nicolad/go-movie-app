@@ -7,3 +7,9 @@ type Movie struct {
 	Title string `json:"title"`
 	Year  string `json:"year"`
 }
+
+type User struct {
+	ID    string   `json:"id"`
+	Name  string   `json:"name"`
+	Likes []*Movie `json:"likes"`
+}

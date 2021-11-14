@@ -1,75 +1,48 @@
 package db
 
 import (
-	"strconv"
-	"sync"
+	"fmt"
+	"os"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres" // Used in gorm
 )
 
-type User struct {
-	ID    string
-	Name  string
-	Likes []string
-	m     sync.Mutex
-}
+var instance *gorm.DB
 
-var users = map[string]*User{
-	"1": &User{
-		ID:   "1",
-		Name: "Chris",
-	},
-	"2": &User{
-		ID:   "2",
-		Name: "Steph",
-	},
-	"3": &User{
-		ID:   "3",
-		Name: "Peter",
-	},
-	"4": &User{
-		ID:   "4",
-		Name: "Tas",
-	},
-	"5": &User{
-		ID:   "5",
-		Name: "Cameron",
-	},
-	"6": &User{
-		ID:   "6",
-		Name: "Tim",
-	},
-}
+// Init creates connection to postgres server
+func Init() {
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	dbname := os.Getenv("DB_NAME")
+	user := os.Getenv("DB_USERNAME")
+	password := os.Getenv("DB_PASSWORD")
 
-var nextID = struct {
-	id int
-	m  sync.Mutex
-}{7, sync.Mutex{}}
+	db, err := gorm.Open("postgres", fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname,
+	))
 
-func GetUser(id string) *User {
-	u, ok := users[id]
-	if !ok {
-		return nil
+	if err != nil {
+		panic(err)
 	}
-	return u
+
+	db.LogMode(true)
+
+	instance = db
 }
 
-func AddUser(name string) {
-	nextID.m.Lock()
-	defer nextID.m.Unlock()
-	id := strconv.Itoa(nextID.id)
-	users[id] = &User{
-		ID:   id,
-		Name: name,
+// GetInstance returns db connection instance
+func GetInstance() *gorm.DB {
+	if instance == nil {
+		panic("Database connection has not been created.")
 	}
-	nextID.id++
+	return instance
 }
 
-func (u *User) Like(movieID string) {
-	u.m.Lock()
-	defer u.m.Unlock()
-	for _, id := range u.Likes {
-		if movieID == id {
-			return
-		}
+// Close ends the db connection
+func Close() {
+	if instance == nil {
+		return
 	}
-	u.Likes = append(u.Likes, movieID)
+	instance.Close()
 }
