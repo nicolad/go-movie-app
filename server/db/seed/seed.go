@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	connection "github.com/taisuke-j/apollo-demo/db"
-	"github.com/taisuke-j/apollo-demo/graph/model"
+	connection "github.com/nicolad/go-movie-app/db"
+	"github.com/nicolad/go-movie-app/graph/model"
 )
 
 func main() {

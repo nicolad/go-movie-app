@@ -6,8 +6,8 @@ package graph
 import (
 	"context"
 
-	"github.com/taisuke-j/apollo-demo/graph/generated"
-	"github.com/taisuke-j/apollo-demo/graph/model"
+	"github.com/nicolad/go-movie-app/graph/generated"
+	"github.com/nicolad/go-movie-app/graph/model"
 )
 
 func (r *mutationResolver) CreateArticle(ctx context.Context, input model.NewArticle) (*model.Article, error) {

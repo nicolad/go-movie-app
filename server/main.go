@@ -8,10 +8,10 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/go-chi/chi"
+	"github.com/nicolad/go-movie-app/db"
+	"github.com/nicolad/go-movie-app/graph"
+	"github.com/nicolad/go-movie-app/graph/generated"
 	"github.com/rs/cors"
-	"github.com/taisuke-j/apollo-demo/db"
-	"github.com/taisuke-j/apollo-demo/graph"
-	"github.com/taisuke-j/apollo-demo/graph/generated"
 )
 
 const defaultPort = "8080"
