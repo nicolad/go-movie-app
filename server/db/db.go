@@ -3,12 +3,24 @@ package db
 import (
 	"fmt"
 	"os"
+	"sync"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // Used in gorm
 )
 
+
+
 var instance *gorm.DB
+
+
+type User struct {
+	ID    string
+	Name  string
+	Likes []string
+	m     sync.Mutex
+}
+
 
 // Init creates connection to postgres server
 func Init() {
