@@ -1,4 +1,4 @@
-module github.com/taisuke-j/apollo-demo
+module github.com/nicolad/go-movie-app
 
 go 1.14
 

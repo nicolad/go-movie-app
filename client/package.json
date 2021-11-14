@@ -6,7 +6,7 @@
   "main": "./src/index.tsx",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/taisuke-j/apollo-demo.git"
+    "url": "git+ssh://git@github.com/nicolad/go-movie-app.git"
   },
   "scripts": {
     "build": "webpack",

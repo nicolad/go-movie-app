@@ -14,9 +14,8 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ./server:/go/src/github.com/taisuke-j/apollo-demo
-    tty:
-      true
+      - ./server:/go/src/github.com/nicolad/go-movie-app
+    tty: true
     depends_on:
       - db
   db:

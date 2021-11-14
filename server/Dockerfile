@@ -1,7 +1,7 @@
 FROM golang:1.14.1-alpine
 
 # Move to project root
-WORKDIR /go/src/github.com/taisuke-j/apollo-demo
+WORKDIR /go/src/github.com/nicolad/go-movie-app
 
 # Install air
 RUN apk update
