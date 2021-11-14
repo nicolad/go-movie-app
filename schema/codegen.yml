@@ -1,0 +1,23 @@
+# Codegen for the client
+overwrite: true
+schema: 
+  - ./schema.graphql
+  - ../client/src/graphql/client-schema.graphql
+documents: ../client/src/graphql/**/*.ts
+generates:
+  ../client/src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withComponent: false
+      withHooks: true
+      withHOC: false
+      apolloReactCommonImportFrom: "@apollo/client"
+      apolloReactComponentsImportFrom: "@apollo/client"
+      apolloReactHooksImportFrom: "@apollo/client"
+      apolloReactHocImportFrom: "@apollo/client"
+  ../client/src/generated/schema.json:
+    plugins:
+      - introspection

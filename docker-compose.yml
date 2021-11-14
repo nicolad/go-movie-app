@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  api:
+    build:
+      context: ./server
+    environment:
+      PORT: 4000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: demo
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+    ports:
+      - 4000:4000
+    volumes:
+      - ./server:/go/src/github.com/taisuke-j/apollo-demo
+    tty:
+      true
+    depends_on:
+      - db
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_DB: demo
+      POSTGRES_PASSWORD: admin
+    ports:
+      - 5433:5432

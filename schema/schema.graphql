@@ -1,0 +1,59 @@
+# GraphQL schema
+
+type Article {
+  id: Int!
+  title: String!
+  body: String!
+  authorID: Int!
+  author: Author!
+  createdAt: Time!
+  updatedAt: Time!
+}
+
+type Author {
+  id: Int!
+  name: String!
+  createdAt: Time!
+  updatedAt: Time!
+}
+
+# Query
+type Query {
+  articles: [Article!]!
+  article(id: Int!): Article!
+  authors: [Author!]!
+  author(id: Int!): Author!
+}
+
+# Mutation
+input NewArticle {
+  title: String!
+  body: String!
+  authorID: Int!
+}
+
+input NewAuthor {
+  name: String!
+}
+
+input EditArticle {
+  id: Int!
+  title: String!
+  body: String!
+}
+
+input EditAuthor {
+  id: Int!
+  name: String!
+}
+
+type Mutation {
+  createArticle(input: NewArticle!): Article!
+  updateArticle(input: EditArticle!): Article!
+  deleteArticle(id: Int!): Article!
+  createAuthor(input: NewAuthor!): Author!
+  updateAuthor(input: EditAuthor!): Author!
+  deleteAuthor(id: Int!): Author!
+}
+
+scalar Time

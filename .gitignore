@@ -1,0 +1,10 @@
+node_modules
+dist
+.vscode
+tmp
+
+*.test
+
+.DS_Store
+npm-debug.log
+.env
