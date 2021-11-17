@@ -1,13 +1,18 @@
 package omdb
 
 import (
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 )
 
-var APIKey = "b309ecf7"
 var Host = "www.omdbapi.com"
 
 type Movie struct {
@@ -18,6 +23,16 @@ type Movie struct {
 }
 
 func Search(term string) ([]Movie, error) {
+
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
+  
+	APIKey := os.Getenv("API_KEY")
+
+	fmt.Print(APIKey)
+	
 	q := url.Values{}
 	q.Add("apikey", APIKey)
 	q.Add("s", term)
