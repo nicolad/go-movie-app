@@ -2,14 +2,12 @@
 
 package model
 
-type Movie struct {
-	ID    string `json:"id"`
-	Title string `json:"title"`
-	Year  string `json:"year"`
-}
+import (
+	"github.com/nicolad/go-movie-app/omdb"
+)
 
 type User struct {
-	ID    string   `json:"id"`
-	Name  string   `json:"name"`
-	Likes []*Movie `json:"likes"`
+	ID    string        `json:"id"`
+	Name  string        `json:"name"`
+	Likes []*omdb.Movie `json:"likes"`
 }

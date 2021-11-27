@@ -22,8 +22,7 @@ type Movie struct {
 	Error string
 }
 
-func Search(term string) ([]Movie, error) {
-
+func Search(term string) ([]*Movie, error) {
 	err := godotenv.Load()
 	if err != nil {
 	  log.Fatal("Error loading .env file")
@@ -49,7 +48,7 @@ func Search(term string) ([]Movie, error) {
 	defer res.Body.Close()
 
 	var jsonRes struct {
-		Search []Movie
+		Search []*Movie
 	}
 
 	decoder := json.NewDecoder(res.Body)
@@ -61,6 +60,12 @@ func Search(term string) ([]Movie, error) {
 }
 
 func Get(id string) (*Movie, error) {
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
+  
+	APIKey := os.Getenv("API_KEY")
 	q := url.Values{}
 	q.Add("apikey", APIKey)
 	q.Add("i", id)

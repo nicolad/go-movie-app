@@ -3,12 +3,21 @@ package db
 import (
 	"fmt"
 	"os"
+	"sync"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // Used in gorm
 )
 
 var instance *gorm.DB
+
+
+type User struct {
+	ID    string
+	Name  string
+	Likes []string
+	m     sync.Mutex
+}
 
 // Init creates connection to postgres server
 func Init() {
@@ -37,6 +46,18 @@ func GetInstance() *gorm.DB {
 		panic("Database connection has not been created.")
 	}
 	return instance
+}
+
+
+func (u *User) Like(movieID string) {
+	u.m.Lock()
+	defer u.m.Unlock()
+	for _, id := range u.Likes {
+		if movieID == id {
+			return
+		}
+	}
+	u.Likes = append(u.Likes, movieID)
 }
 
 // Close ends the db connection

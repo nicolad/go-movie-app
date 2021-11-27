@@ -21,8 +21,13 @@ func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error
 	r.DB.Preload("User").First(&user, id)
 	return &user, nil
 }
+func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
+	users := []*model.User{}
+	r.DB.Preload("User").Find(&users)
+	return users, nil
+}
 
-func (r *queryResolver) Movies(ctx context.Context, search string) ([]*model.Movie, error) {
+func (r *queryResolver) Movies(ctx context.Context, search string) ([]*omdb.Movie, error) {
 	return omdb.Search(search)
 }
 
